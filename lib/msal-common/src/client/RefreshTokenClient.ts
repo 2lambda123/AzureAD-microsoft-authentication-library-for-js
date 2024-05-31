@@ -407,15 +407,22 @@ export class RefreshTokenClient extends BaseClient {
                 this.cryptoUtils,
                 this.performanceClient
             );
-            const reqCnfData = await invokeAsync(
-                popTokenGenerator.generateCnf.bind(popTokenGenerator),
-                PerformanceEvents.PopTokenGenerateCnf,
-                this.logger,
-                this.performanceClient,
-                request.correlationId
-            )(request, this.logger);
+            let reqCnfData = request.reqCnf;
+            if (!reqCnfData) {
+                const generatedReqCnfData = await invokeAsync(
+                    popTokenGenerator.generateCnf.bind(popTokenGenerator),
+                    PerformanceEvents.PopTokenGenerateCnf,
+                    this.logger,
+                    this.performanceClient,
+                    request.correlationId
+                )(request, this.logger);
+
+                reqCnfData = generatedReqCnfData.reqCnfString;
+                request.signPopToken = true;
+            }
+
             // SPA PoP requires full Base64Url encoded req_cnf string (unhashed)
-            parameterBuilder.addPopToken(reqCnfData.reqCnfString);
+            parameterBuilder.addPopToken(reqCnfData);
         } else if (request.authenticationScheme === AuthenticationScheme.SSH) {
             if (request.sshJwk) {
                 parameterBuilder.addSshJwk(request.sshJwk);

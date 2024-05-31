@@ -173,7 +173,7 @@ export class NativeInteractionClient extends BaseInteractionClient {
         // fall back to native calls
         const messageBody: NativeExtensionRequestBody = {
             method: NativeExtensionMethod.GetToken,
-            request: nativeRequest,
+            request: { ...nativeRequest, keyId: "" },
         };
 
         const response: object = await this.nativeMessageHandler.sendMessage(
@@ -291,7 +291,7 @@ export class NativeInteractionClient extends BaseInteractionClient {
 
         const messageBody: NativeExtensionRequestBody = {
             method: NativeExtensionMethod.GetToken,
-            request: nativeRequest,
+            request: { ...nativeRequest, keyId: "" },
         };
 
         try {
@@ -481,7 +481,7 @@ export class NativeInteractionClient extends BaseInteractionClient {
             request,
             homeAccountIdentifier,
             idTokenClaims,
-            result.accessToken,
+            response.access_token,
             result.tenantId,
             reqTimestamp
         );
@@ -535,7 +535,10 @@ export class NativeInteractionClient extends BaseInteractionClient {
         response: NativeResponse,
         request: NativeTokenRequest
     ): Promise<string> {
-        if (request.tokenType === AuthenticationScheme.POP) {
+        if (
+            request.tokenType === AuthenticationScheme.POP &&
+            request.signPopToken
+        ) {
             /**
              * This code prioritizes SHR returned from the native layer. In case of error/SHR not calculated from WAM and the AT
              * is still received, SHR is calculated locally
@@ -725,7 +728,11 @@ export class NativeInteractionClient extends BaseInteractionClient {
                 responseScopes.printScopes(),
                 tokenExpirationSeconds,
                 0,
-                base64Decode
+                base64Decode,
+                undefined,
+                request.tokenType as AuthenticationScheme,
+                undefined,
+                request.keyId
             );
 
         const nativeCacheRecord = new CacheRecord(
@@ -917,6 +924,7 @@ export class NativeInteractionClient extends BaseInteractionClient {
                 ...request.tokenQueryParameters,
             },
             extendedExpiryToken: false, // Make this configurable?
+            reqCnf: request.reqCnf || "",
         };
 
         this.handleExtraBrokerParams(validatedRequest);
@@ -935,17 +943,34 @@ export class NativeInteractionClient extends BaseInteractionClient {
             };
 
             const popTokenGenerator = new PopTokenGenerator(this.browserCrypto);
-            const reqCnfData = await invokeAsync(
-                popTokenGenerator.generateCnf.bind(popTokenGenerator),
-                PerformanceEvents.PopTokenGenerateCnf,
-                this.logger,
-                this.performanceClient,
-                this.correlationId
-            )(shrParameters, this.logger);
 
-            // to reduce the URL length, it is recommended to send the hash of the req_cnf instead of the whole string
-            validatedRequest.reqCnf = reqCnfData.reqCnfHash;
-            validatedRequest.keyId = reqCnfData.kid;
+            // generate reqCnf if not provided in the request
+            let reqCnfData = request.reqCnf;
+            let kid;
+            if (!reqCnfData) {
+                const generatedReqCnfData = await invokeAsync(
+                    popTokenGenerator.generateCnf.bind(popTokenGenerator),
+                    PerformanceEvents.PopTokenGenerateCnf,
+                    this.logger,
+                    this.performanceClient,
+                    request.correlationId
+                )(shrParameters, this.logger);
+                reqCnfData = generatedReqCnfData.reqCnfString;
+                kid = generatedReqCnfData.kid;
+                validatedRequest.signPopToken = true;
+            } else {
+                try {
+                    kid = JSON.parse(base64Decode(reqCnfData)).kid;
+                } catch (e) {
+                    throw createClientAuthError(
+                        ClientAuthErrorCodes.keyIdMissing
+                    );
+                }
+            }
+
+            // SPAs require whole string to be passed to broker
+            validatedRequest.reqCnf = reqCnfData;
+            validatedRequest.keyId = kid;
         }
 
         return validatedRequest;
