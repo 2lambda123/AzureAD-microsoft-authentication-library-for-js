@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1717413232048,
+  "lastUpdate": 1717413271817,
   "repoUrl": "https://github.com/2lambda123/AzureAD-microsoft-authentication-library-for-js",
   "entries": {
     "msal-node client-credential Regression Test": [
@@ -9252,6 +9252,44 @@ window.BENCHMARK_DATA = {
             "range": "±2.04%",
             "unit": "ops/sec",
             "extra": "225 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "54554557+2lambda123@users.noreply.github.com",
+            "name": "Robert Bongart (MSc MSc MA)",
+            "username": "2lambda123"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1f925d5c128bf3de38f1a8a2be695a7e0ac2f473",
+          "message": "Merge pull request #3 from 2lambda123/update-headless-mode\n\nUpdate Puppeteer headless setting to \"new\"",
+          "timestamp": "2024-06-03T06:08:51-05:00",
+          "tree_id": "f9382860ed10a352c48b6673f254bc42b7e4ec4c",
+          "url": "https://github.com/2lambda123/AzureAD-microsoft-authentication-library-for-js/commit/1f925d5c128bf3de38f1a8a2be695a7e0ac2f473"
+        },
+        "date": 1717413270527,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "ConfidentialClientApplication#acquireTokenByClientCredential-fromCache-resourceIsFirstItemInTheCache",
+            "value": 213873,
+            "range": "±1.01%",
+            "unit": "ops/sec",
+            "extra": "236 samples"
+          },
+          {
+            "name": "ConfidentialClientApplication#acquireTokenByClientCredential-fromCache-resourceIsLastItemInTheCache",
+            "value": 188806,
+            "range": "±2.31%",
+            "unit": "ops/sec",
+            "extra": "220 samples"
           }
         ]
       }
