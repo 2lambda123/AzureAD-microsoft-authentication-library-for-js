@@ -2,28 +2,26 @@ const puppeteer = require('puppeteer');
 const NodeEnvironment = require('jest-environment-node').TestEnvironment;
 
 class PuppeteerEnvironment extends NodeEnvironment {
-	constructor({ globalConfig, projectConfig }, context) {
-		super({ globalConfig, projectConfig }, context);
-	}
+  constructor({globalConfig, projectConfig}, context) {
+    super({globalConfig, projectConfig}, context);
+  }
 
-	async setup() {
-		await super.setup();
+  async setup() {
+    await super.setup();
 
-		// connect to puppeteer
-		this.global.__BROWSER__ = await puppeteer.launch({
-			headless: "new",
-			ignoreDefaultArgs: ["--no-sandbox", "–disable-setuid-sandbox"]
-		});
-	}
+    // connect to puppeteer
+    this.global.__BROWSER__ = await puppeteer.launch({
+      headless : "new",
+      ignoreDefaultArgs : [ "--no-sandbox", "–disable-setuid-sandbox" ]
+    });
+  }
 
-	async teardown() {
-		await super.teardown();
-		this.global.__BROWSER__.close();
-	}
+  async teardown() {
+    await super.teardown();
+    this.global.__BROWSER__.close();
+  }
 
-	runScript(script) {
-		return super.runScript(script);
-	}
+  runScript(script) { return super.runScript(script); }
 }
 
 module.exports = PuppeteerEnvironment;
