@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1717413271817,
+  "lastUpdate": 1717416847962,
   "repoUrl": "https://github.com/2lambda123/AzureAD-microsoft-authentication-library-for-js",
   "entries": {
     "msal-node client-credential Regression Test": [
@@ -9290,6 +9290,44 @@ window.BENCHMARK_DATA = {
             "range": "±2.31%",
             "unit": "ops/sec",
             "extra": "220 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "146478655+penify-dev[bot]@users.noreply.github.com",
+            "name": "penify-dev[bot]",
+            "username": "penify-dev[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "837d0e09a6e70b5b520bd92b7f7c71a8fd3cb9fc",
+          "message": "snorkell_ai/config_dc2cc\n\ndev",
+          "timestamp": "2024-06-03T12:07:44Z",
+          "tree_id": "83751448a1d279daeed4bcb7455da21ee26c4f1a",
+          "url": "https://github.com/2lambda123/AzureAD-microsoft-authentication-library-for-js/commit/837d0e09a6e70b5b520bd92b7f7c71a8fd3cb9fc"
+        },
+        "date": 1717416846537,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "ConfidentialClientApplication#acquireTokenByClientCredential-fromCache-resourceIsFirstItemInTheCache",
+            "value": 183466,
+            "range": "±2.11%",
+            "unit": "ops/sec",
+            "extra": "221 samples"
+          },
+          {
+            "name": "ConfidentialClientApplication#acquireTokenByClientCredential-fromCache-resourceIsLastItemInTheCache",
+            "value": 208761,
+            "range": "±1.63%",
+            "unit": "ops/sec",
+            "extra": "237 samples"
           }
         ]
       }
