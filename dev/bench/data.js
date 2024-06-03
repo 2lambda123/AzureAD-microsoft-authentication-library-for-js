@@ -1,6 +1,6 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1717087842926,
-  "repoUrl": "https://github.com/AzureAD/microsoft-authentication-library-for-js",
+  "lastUpdate": 1717413216380,
+  "repoUrl": "https://github.com/2lambda123/AzureAD-microsoft-authentication-library-for-js",
   "entries": {
     "msal-node client-credential Regression Test": [
       {
@@ -9176,6 +9176,44 @@ window.BENCHMARK_DATA = {
             "range": "±2.22%",
             "unit": "ops/sec",
             "extra": "222 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "54554557+2lambda123@users.noreply.github.com",
+            "name": "Robert Bongart (MSc MSc MA)",
+            "username": "2lambda123"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "64655c3055f90cbef96c0243a226462464a606bf",
+          "message": "Merge pull request #2 from 2lambda123/dependabot/github_actions/peter-evans/create-pull-request-6\n\nBump peter-evans/create-pull-request from 5 to 6",
+          "timestamp": "2024-06-03T06:08:14-05:00",
+          "tree_id": "3537fda856c9f80ce198dcb8470f30ee201eb4e8",
+          "url": "https://github.com/2lambda123/AzureAD-microsoft-authentication-library-for-js/commit/64655c3055f90cbef96c0243a226462464a606bf"
+        },
+        "date": 1717413215147,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "ConfidentialClientApplication#acquireTokenByClientCredential-fromCache-resourceIsFirstItemInTheCache",
+            "value": 193774,
+            "range": "±2.06%",
+            "unit": "ops/sec",
+            "extra": "219 samples"
+          },
+          {
+            "name": "ConfidentialClientApplication#acquireTokenByClientCredential-fromCache-resourceIsLastItemInTheCache",
+            "value": 213213,
+            "range": "±1.23%",
+            "unit": "ops/sec",
+            "extra": "214 samples"
           }
         ]
       }
