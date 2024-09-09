@@ -1,8 +1,18 @@
 # Change Log - @azure/msal-common
 
-This log was last generated on Mon, 06 May 2024 23:48:17 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Sep 2024 07:26:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 14.11.0
+
+Mon, 09 Sep 2024 07:26:35 GMT
+
+### Minor changes
+
+- Instrument pre-redirect flow #7134 (kshabelko@microsoft.com)
+- Bump eslint-config-msal to v0.0.0
+- Bump msal-test-utils to v0.0.1
 
 ## 14.10.0
 
