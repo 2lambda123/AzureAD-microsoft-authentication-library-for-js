@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1717416847962,
+  "lastUpdate": 1725867068998,
   "repoUrl": "https://github.com/2lambda123/AzureAD-microsoft-authentication-library-for-js",
   "entries": {
     "msal-node client-credential Regression Test": [
@@ -9328,6 +9328,44 @@ window.BENCHMARK_DATA = {
             "range": "±1.63%",
             "unit": "ops/sec",
             "extra": "237 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "54554557+2lambda123@users.noreply.github.com",
+            "name": "Robert Bongart (MSc MSc MA)",
+            "username": "2lambda123"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "3a9aab78857736776b74b57f8985220eae1e93c9",
+          "message": "Merge pull request #11 from 2lambda123/dependabot/github_actions/peter-evans/create-pull-request-7\n\nBump peter-evans/create-pull-request from 6 to 7",
+          "timestamp": "2024-09-09T09:25:17+02:00",
+          "tree_id": "db1aaba10374aa51e399daac048c0521f67c2da3",
+          "url": "https://github.com/2lambda123/AzureAD-microsoft-authentication-library-for-js/commit/3a9aab78857736776b74b57f8985220eae1e93c9"
+        },
+        "date": 1725867067450,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "ConfidentialClientApplication#acquireTokenByClientCredential-fromCache-resourceIsFirstItemInTheCache",
+            "value": 183152,
+            "range": "±2.08%",
+            "unit": "ops/sec",
+            "extra": "224 samples"
+          },
+          {
+            "name": "ConfidentialClientApplication#acquireTokenByClientCredential-fromCache-resourceIsLastItemInTheCache",
+            "value": 210249,
+            "range": "±1.24%",
+            "unit": "ops/sec",
+            "extra": "231 samples"
           }
         ]
       }
